@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <form ng-submit="save()">
+            <h1>Edit Payment</h1><table>
+                <tbody>
+                    <tr>
+                        <td><label for="form:id">Index:</label></td>
+                        <td><span id="form:id" title="Id">{{index}}</span></td>
+                    </tr>
+                    <tr>
+                        <td><label for="form:amount">Amount: *</label></td>
+                        <td><input id="form:amount" type="text" name="form:amount" ng-model="entity.amount" title="Amount" required/></td>
+                    </tr>
+                    <tr>
+                        <td><label for="form:date">Date:</label></td>
+                        <td><input id="form:date" type="text" name="form:date" ng-model="entity.date" title="Date" /></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div style="margin-top: 20px">
+                <input type="submit" value="{{create ? 'Add' : 'Update'}}" />
+                <input type="button" ng-click="delete()" value="Delete" ng-hide="create" />
+                <input type="button" ng-click="reset()" value="Reset" />
+                <input type="button" ng-click="closeThisDialog()" value="Cancel" />
+            </div>
+        </form>
+    </body>
+</html>

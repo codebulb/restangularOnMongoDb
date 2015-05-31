@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Customers</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1>Customers</h1>
+        <ul ng-show="errorNotFound != null"><li>Entity not found: {{errorNotFound}}</li></ul>
+        <input type="button" onclick="window.location.href = '#/customers/new';return false;" value="Add" />
+        <table border="1">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">City</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="entity in entities">
+                    <td><a href="#/customers/{{entity._id.$oid}}">{{entity._id.$oid}}</a></td>
+                    <td>{{entity.name}}</td>
+                    <td>{{entity.address}}</td>
+                    <td>{{entity.city}}</td>
+                    <td>
+                        <a href="" ng-click="delete(entity)">X</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>

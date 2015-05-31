@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <form ng-submit="save()">
+            <h1>{{entity._id.$oid == null ? 'Create Customer' : 'Edit Customer'}}</h1><table>
+                <tbody>
+                    <tr ng-hide="entity._id.$oid == null">
+                        <td><label for="form:id">Id:</label></td>
+                        <td><span id="form:id" title="Id">{{entity._id.$oid}}</span></td>
+                    </tr>
+                    <tr>
+                        <td><label for="form:name">Name: *</label></td>
+                        <td><input id="form:name" type="text" name="form:name" ng-model="entity.name" title="Name" required/></td>
+                    </tr>
+                    <tr>
+                        <td><label for="form:address">Address:</label></td>
+                        <td><input id="form:address" type="text" name="form:address" ng-model="entity.address" title="Address" /></td>
+                    </tr>
+                    <tr>
+                        <td><label for="form:city">City:</label></td>
+                        <td><input id="form:city" type="text" name="form:city" ng-model="entity.city" title="City" /></td>
+                    </tr>
+                    <tr>
+                        <td><label for="form:employmentStatus">Employment status:</label></td>
+                        <td><select id="form:employmentStatus" name="form:employmentStatus" ng-model="entity.employmentStatus" size="1" title="Employment status"
+                                    ng-change="changeEmploymentStatus()">
+                                <option value="Unemployed" selected="selected">Unemployed</option>
+                                <option value="Employed">Employed</option>
+                                <option value="Firm_owner">Firm owner</option>
+                            </select></td>
+                    </tr>
+                    <tr>
+                        <td><label id="form:companyNameLabel" for="form:companyName"
+                                   ng-hide="entity.employmentStatus === 'Unemployed'">Company name:</label></td>
+                        <td><input id="form:companyName" type="text" name="form:companyName" ng-model="entity.companyName" title="Company name:" 
+                                   ng-hide="entity.employmentStatus === 'Unemployed'"/></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h2>Payment List</h2>
+            <input type="button" ng-click="editPayment({})" value="Add" />
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th scope="col">Index</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="payment in entity.payments">
+                        <td><a href="" ng-click="editPayment(payment, $index)">{{$index}}</a></td>
+                        <td>{{payment.amount}}</td>
+                        <td>{{payment.date}}</td>
+                        <td>
+                            <a href="" ng-onclick="deletePayment($index)">X</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div style="margin-top: 20px">
+                <input type="submit" value="Save" />
+                <input type="button" ng-click="deleteEntity()" value="Delete" ng-hide="entity._id.$oid == null">
+                <input type="button" ng-click="initEntity()" value="Reset" />
+                <input type="button" onclick="window.location.href = '#/customers';return false;" value="Cancel" />
+            </div>
+        </form>
+    </body>
+</html>
